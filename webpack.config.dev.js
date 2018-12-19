@@ -1,6 +1,7 @@
 import path from 'path';
 
-module.exports = {
+// Replaced "module.exports ="" with "export default" to fix eslint error "No default export found in module  import/default"
+export default {
   mode: "development", // "production" | "development" | "none"  // Chosen mode tells webpack to use its built-in optimizations accordingly.
   entry: path.resolve(__dirname, 'src/index'), // string | object | array  // defaults to './src'
   // Here the application starts executing

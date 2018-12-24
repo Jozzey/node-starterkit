@@ -11,9 +11,9 @@ describe('Our first test', () => {
 });
 
 describe('index.html', () => {
-  it('should say hello', () => {
+  it('should have h1 that says Users', () => {
     const index = fs.readFileSync('./src/index.html', "utf-8");
     const dom = new JSDOM(index);
-    expect(dom.window.document.querySelector("h1").textContent).to.equal("Hello World!");
+    expect(dom.window.document.querySelector("h1").textContent).to.equal("Users");
   });
 });

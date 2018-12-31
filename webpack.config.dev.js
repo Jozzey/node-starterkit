@@ -1,4 +1,5 @@
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 // Replaced "module.exports =" with "export default" to fix eslint error "No default export found in module  import/default"
 export default {
@@ -54,6 +55,10 @@ export default {
   target: "web", // enum  // the environment in which the bundle should run
   // changes chunk loading behavior and available modules
   plugins: [
-    // ...
+    // Create HTML file that includes reference to bundled JS
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    })
   ],
 }

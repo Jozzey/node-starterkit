@@ -1,5 +1,5 @@
 import path from 'path';
-import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 // Replaced "module.exports =" with "export default" to fix eslint error "No default export found in module  import/default"
 export default {
@@ -55,9 +55,22 @@ export default {
   target: "web", // enum  // the environment in which the bundle should run
   // changes chunk loading behavior and available modules
   plugins: [
-    // Eliminate duplicate packages when generating bundle
-    new webpack.optimize.DedupePlugin(),
-    // Minify JS
-    new webpack.optimize.UglifyJsPlugin()
+    // Create HTML file that includes reference to bundled JS
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
+      inject: true
+    })
   ],
 }

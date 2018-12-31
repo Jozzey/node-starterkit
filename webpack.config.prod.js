@@ -4,7 +4,10 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 // Replaced "module.exports =" with "export default" to fix eslint error "No default export found in module  import/default"
 export default {
   mode: "production", // "production" | "development" | "none"  // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  entry: path.resolve(__dirname, 'src/index'), // string | object | array  // defaults to './src'
+  entry: { // string | object | array  // defaults to './src'
+    vendor: path.resolve(__dirname, 'src/vendor'),
+    main: path.resolve(__dirname, 'src/index')
+  },
   // Here the application starts executing
   // and webpack starts bundling
   output: {
@@ -12,7 +15,7 @@ export default {
     path: path.resolve(__dirname, 'dist'), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    filename: "bundle.js", // string    // the filename template for entry chunks
+    filename: '[name].js', // string    // the filename template for entry chunks. [name] uses the entry point name e.g. vendor or main
     publicPath: "/", // string    // the url to the output directory resolved relative to the HTML page
   },
   module: {
@@ -49,6 +52,29 @@ export default {
         ]
       },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
   },
   devtool: "source-map", // enum  // enhance debugging by adding meta info for the browser devtools
   // source-map most detailed at the expense of build speed.

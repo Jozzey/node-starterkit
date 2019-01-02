@@ -1,5 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 // Replaced "module.exports =" with "export default" to fix eslint error "No default export found in module  import/default"
 export default {
@@ -15,7 +16,7 @@ export default {
     path: path.resolve(__dirname, 'dist'), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    filename: '[name].js', // string    // the filename template for entry chunks. [name] uses the entry point name e.g. vendor or main
+    filename: '[name].[contenthash].js', // string    // the filename template for entry chunks. [name] uses the entry point name e.g. vendor or main
     publicPath: "/", // string    // the url to the output directory resolved relative to the HTML page
   },
   module: {
@@ -47,8 +48,15 @@ export default {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader'
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '../'
+            }
+          },
+          "css-loader"
         ]
       },
     ],
@@ -81,6 +89,14 @@ export default {
   target: "web", // enum  // the environment in which the bundle should run
   // changes chunk loading behavior and available modules
   plugins: [
+    // Generate an external css file with a hash in the filename
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].css"
+    }),
+
     // Create HTML file that includes reference to bundled JS
     new HtmlWebpackPlugin({
       template: 'src/index.html',

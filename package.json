@@ -59,7 +59,6 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.27.1",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-hot-middleware": "^2.24.3",
-    "webpack-md5-hash": "^0.0.6"
+    "webpack-hot-middleware": "^2.24.3"
   }
 }

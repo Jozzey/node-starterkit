@@ -1,6 +1,10 @@
 {
   "name": "node-starterkit",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jozzey/node-starterkit.git"
+  },
   "description": "JavaScript development environment",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",

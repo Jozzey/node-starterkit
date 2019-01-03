@@ -6,5 +6,5 @@ export default function getBaseUrl() {
   var url = new URL(url_string);
   var useMockApi = url.searchParams.get("useMockApi");
 
-  return useMockApi ? 'http://localhost:3001/' : '/';
+  return useMockApi ? "http://localhost:3001/" : "/";
 }

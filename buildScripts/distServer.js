@@ -1,7 +1,7 @@
-import express from 'express';
-import path from 'path';
-import opn from 'opn';
-import compression from 'compression';
+import express from "express";
+import path from "path";
+import opn from "opn";
+import compression from "compression";
 
 /* eslint-disable no-console */
 
@@ -9,13 +9,13 @@ const port = 3000;
 const app = express();
 
 app.use(compression());
-app.use(express.static('dist'));
+app.use(express.static("dist"));
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
-app.get('/users', function(req, res) {
+app.get("/users", function(req, res) {
   // Hard coding for simplicity. Pretend this hits a real database
   res.json([
     {"id": 1,"firstName":"Bob","lastName":"Smith","email":"bob@gmail.com"},
@@ -28,7 +28,7 @@ app.listen(port, function(err) {
   if (err) {
     console.log(err);
   } else {
-    opn('http://localhost:' + port);
+    opn("http://localhost:" + port);
   }
 });
 

@@ -1,22 +1,22 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 // Replaced "module.exports =" with "export default" to fix eslint error "No default export found in module  import/default"
 export default {
   mode: "production", // "production" | "development" | "none"  // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  entry: { // string | object | array  // defaults to './src'
-    vendor: path.resolve(__dirname, 'src/vendor'),
-    main: path.resolve(__dirname, 'src/index')
+  entry: { // string | object | array  // defaults to "./src"
+    vendor: path.resolve(__dirname, "src/vendor"),
+    main: path.resolve(__dirname, "src/index")
   },
   // Here the application starts executing
   // and webpack starts bundling
   output: {
     // options related to how webpack emits results
-    path: path.resolve(__dirname, 'dist'), // string
+    path: path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    filename: '[name].[contenthash].js', // string    // the filename template for entry chunks. [name] uses the entry point name e.g. vendor or main
+    filename: "[name].[contenthash].js", // string    // the filename template for entry chunks. [name] uses the entry point name e.g. vendor or main
     publicPath: "/", // string    // the url to the output directory resolved relative to the HTML page
   },
   module: {
@@ -53,7 +53,7 @@ export default {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              publicPath: '../'
+              publicPath: "../"
             }
           },
           "css-loader"
@@ -63,13 +63,13 @@ export default {
   },
   optimization: {
     splitChunks: {
-      chunks: 'async',
+      chunks: "async",
       minSize: 30000,
       maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
+      automaticNameDelimiter: "~",
       name: true,
       cacheGroups: {
         vendors: {
@@ -99,7 +99,7 @@ export default {
 
     // Create HTML file that includes reference to bundled JS
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: "src/index.html",
       minify: {
         removeComments: true,
         collapseWhitespace: true,

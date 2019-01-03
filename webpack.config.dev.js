@@ -1,15 +1,15 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 // Replaced "module.exports =" with "export default" to fix eslint error "No default export found in module  import/default"
 export default {
   mode: "development", // "production" | "development" | "none"  // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  entry: path.resolve(__dirname, 'src/index'), // string | object | array  // defaults to './src'
+  entry: path.resolve(__dirname, "src/index"), // string | object | array  // defaults to "./src"
   // Here the application starts executing
   // and webpack starts bundling
   output: {
     // options related to how webpack emits results
-    path: path.resolve(__dirname, 'src'), // string
+    path: path.resolve(__dirname, "src"), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
     filename: "bundle.js", // string    // the filename template for entry chunks
@@ -44,8 +44,8 @@ export default {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader'
+          "style-loader",
+          "css-loader"
         ]
       },
     ],
@@ -57,7 +57,7 @@ export default {
   plugins: [
     // Create HTML file that includes reference to bundled JS
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: "src/index.html",
       inject: true
     })
   ],
